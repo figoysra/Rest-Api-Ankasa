@@ -7,7 +7,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: dbUsername,
   password: dbPassword,
-  database: 'ankasa',
+  database: 'db_ankasa',
 });
 
 // unutk mengecek koneksi

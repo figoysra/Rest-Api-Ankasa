@@ -77,7 +77,6 @@ const users = {
       failed(res, 401, error);
     }
   },
-
   getDetails: (req, res) => {
     try {
       const { id } = req.params;

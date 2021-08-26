@@ -36,10 +36,13 @@ const usersModel = {
     });
   }),
   insert: (body) => new Promise((resolve, reject) => {
-    db.query(`INSERT INTO users (name,email,password,username,picture,phone_number,address,birth_date,gender) 
-                VALUE ('${body.email}','${body.password}','${body.username}','${body.name}',
-                    '${body.picturee}','${body.phone_number}','${body.address}','${body.birth_date}',
-                    '${body.gender}')`, (err, result) => {
+    db.query(`INSERT INTO users (
+      username,email,password,phone,address,
+      photoProfile,creditCard,admin
+      ) VALUE (
+        '${body.username}','${body.email}','${body.password}','${body.phone}',
+        '${body.address}','${body.photoProfile}','${body.creditCard}','${body.admin}'
+      )`, (err, result) => {
       if (err) {
         reject(err);
       } else {
@@ -59,9 +62,9 @@ const usersModel = {
   }),
   register: (body, pass) => new Promise((resolve, reject) => {
     db.query(
-      `INSERT INTO users (name,email,password) 
+      `INSERT INTO users (username,email,password,admin) 
         VALUE (
-          '${body.name}','${body.email}','${pass}'
+          '${body.username}','${body.email}','${pass}','${body.admin}'
         )`, (err, result) => {
         if (err) {
           reject(err);
@@ -82,10 +85,10 @@ const usersModel = {
   }),
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(
-      `update USERS set name='${body.name}',email='${body.email}',password='${body.password}',
-                username='${body.username}',picture='${body.piture}',phone_number='${body.phone_number}',
-                address='${body.address}',birth_date='${body.birth_date}',gender='${body.gender}'
-                where id='${id}'`, (err, result) => {
+      `update USERS set username='${body.username}',email='${body.email}',
+          password='${body.password}',phone='${body.phone}',address='${body.address}',
+          photoProfile='${body.photoProfile}',creditCard='${body.creditCard}',
+          admin='${body.admin}' where id='${id}'`, (err, result) => {
         if (err) {
           reject(err);
         } else {

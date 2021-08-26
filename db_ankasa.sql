@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.18-MariaDB, for Win64 (AMD64)
 --
--- Host: 127.0.0.1    Database: ujicoba
+-- Host: 127.0.0.1    Database: db_ankasa
 -- ------------------------------------------------------
 -- Server version	10.4.18-MariaDB
 
@@ -92,7 +92,13 @@ CREATE TABLE `transaction` (
   `ticket_id` int(11) NOT NULL,
   `total` int(50) NOT NULL,
   `payment` enum('Eticket Issued','Waiting Payment') NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `country_id` (`country_id`),
+  KEY `ticket_id` (`ticket_id`),
+  KEY `contactPerson` (`contactPerson`),
+  CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
+  CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`),
+  CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`contactPerson`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -102,7 +108,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,82,'Mr','joko',1,0,1,30000,'Waiting Payment');
+INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +130,7 @@ CREATE TABLE `users` (
   `creditCard` varchar(45) DEFAULT NULL,
   `admin` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +139,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','admin','$2b$10$hAUwm4n68t9Q3zP112jKcuRl6VVMLouendAgzKjzV4v/vXlSMpB2.',NULL,NULL,NULL,NULL,'0'),(6,'Make Kowalski','flightbooking@ankasa.com','$2b$10$F8pzS69MUNurAofdsuP4Ke3nGwAF67zThgo31qyxkoQu23B.BJHLO',2147483647,'medan,indonesia','https://i.postimg.cc/CMGc3Fdz/nnzk-ZNYWHa-U.png','4441 1235 5512 5551','1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -145,4 +152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-26 22:56:07
+-- Dump completed on 2021-08-26 23:48:47

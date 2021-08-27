@@ -12,24 +12,10 @@ const countryModel = {
       }
     });
   }),
-  getListByTown: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
+  getList: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
     db.query(
       `select * from country  
-                WHERE town LIKE "%${search}%" 
-                ORDER BY ${field} ${typeSort}
-                LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      },
-    );
-  }),
-  getListByCountry: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
-    db.query(
-      `select * from country  
-                WHERE country LIKE "%${search}%" 
+                WHERE town LIKE "%${search}%" or country LIKE "%${search}%" 
                 ORDER BY ${field} ${typeSort}
                 LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
         if (err) {

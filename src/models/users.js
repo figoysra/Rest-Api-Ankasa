@@ -27,7 +27,7 @@ const usersModel = {
     );
   }),
   getDetails: (id) => new Promise((resolve, reject) => {
-    db.query(`select * from users where id='${id}'`, (err, result) => {
+    db.query(`select * from users where id_users='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {
@@ -88,7 +88,7 @@ const usersModel = {
       `update USERS set username='${body.username}',email='${body.email}',
           password='${body.password}',phone='${body.phone}',address='${body.address}',
           photoProfile='${body.photoProfile}',creditCard='${body.creditCard}',
-          admin='${body.admin}' where id='${id}'`, (err, result) => {
+          admin='${body.admin}' where id_users='${id}'`, (err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -98,7 +98,7 @@ const usersModel = {
     );
   }),
   delete: (id) => new Promise((resolve, reject) => {
-    db.query(`delete from users where id='${id}'`, (err, result) => {
+    db.query(`delete from users where id_users='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {

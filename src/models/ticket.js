@@ -14,10 +14,10 @@ const ticketModel = {
   }),
   getList: () => new Promise((resolve, reject) => {
     db.query(
-      `select id_ticket,logo,airlane,country.town,country.country, u2.town, u2.country, 
+      `select id_ticket,logo,airlane,country.town as departure_city, d.town as destination_city, 
       deptime,arrivedTime,price,class,transit,wifi,meal,bagasi
-      from ticket inner join country on ticket.from_id=country.id_country 
-      left join country u2 on ticket.destination_id=u2.id_country`, (err, result) => {
+      from ticket left join country on ticket.from_id=country.id_country 
+      left join country as d on ticket.destination_id=d.id_country`, (err, result) => {
         if (err) {
           reject(err);
         } else {

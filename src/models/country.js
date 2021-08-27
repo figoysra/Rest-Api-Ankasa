@@ -27,7 +27,7 @@ const countryModel = {
     );
   }),
   getDetails: (id) => new Promise((resolve, reject) => {
-    db.query(`select * from country where id='${id}'`, (err, result) => {
+    db.query(`select * from country where id_country='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {
@@ -51,7 +51,7 @@ const countryModel = {
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(
       `update country set town='${body.town}',country='${body.country}'
-        where id='${id}'`, (err, result) => {
+        where id_country='${id}'`, (err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -61,7 +61,7 @@ const countryModel = {
     );
   }),
   delete: (id) => new Promise((resolve, reject) => {
-    db.query(`delete from country where id='${id}'`, (err, result) => {
+    db.query(`delete from country where id_country='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {

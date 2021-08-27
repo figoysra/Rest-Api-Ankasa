@@ -53,7 +53,7 @@ const users = {
     try {
       const { query } = req;
       const search = query.search === undefined ? '' : query.search;
-      const field = query.field === undefined ? 'id' : query.field;
+      const field = query.field === undefined ? 'id_users' : query.field;
       const typeSort = query.sort === undefined ? '' : query.sort;
       const limit = query.limit === undefined ? 50 : query.limit;
       // eslint-disable-next-line eqeqeq

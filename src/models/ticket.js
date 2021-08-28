@@ -13,7 +13,7 @@ const ticketModel = {
     });
   }),
   getList: (search, field, typeSort, limit, offset, deptime, arrivedTime, airlane, transit,
-    price, wifi, meal, luggage) => new Promise((resolve, reject) => {
+    minprice, maxprice, wifi, meal, luggage) => new Promise((resolve, reject) => {
     db.query(
       `select id_ticket,logo,airlane,country.town as departure_city, 
       country.country as departure_country, d.town as destination_city, 
@@ -21,12 +21,7 @@ const ticketModel = {
       from ticket left join country on ticket.from_id=country.id_country 
       left join country as d on ticket.destination_id=d.id_country
                 WHERE (country.town LIKE "%${search}%" || country.country LIKE "%${search}%")
-                    || (wifi="${wifi}" && meal="${meal}" && luggage="${luggage}")
-                    || (transit="${transit}")
-                    || (deptime="${deptime}")
-                    || (arrivedTime="${arrivedTime}")
-                    || (airlane="${airlane}")
-                    || (price="${price}")
+                    || ((wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%") && (transit LIKE "%${transit}%") && (deptime LIKE "%${deptime}%") && (arrivedTime LIKE "%${arrivedTime}%") && (airlane LIKE "%${airlane}%"))
                 ORDER BY ${field} ${typeSort}
                 LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
         if (err) {

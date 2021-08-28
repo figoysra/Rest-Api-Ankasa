@@ -1,6 +1,8 @@
+const { token } = require('../helper/env');
+
 const data = {
   message: 'login succes',
-  token: '1234',
+  tokenAcces: token,
 };
 
 module.exports = data;

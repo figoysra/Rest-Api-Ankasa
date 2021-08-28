@@ -1,5 +1,6 @@
+const { token } = require('../helper/env');
+
 const midAuth = (req, res, next) => {
-  const token = '1234';
   const { headers } = req;
   if (headers.token === token) {
     next();

@@ -6,8 +6,10 @@ const ticket = {
     try {
       const { query } = req;
       const search = query.search === undefined ? ' ' : query.search;
-      const deptime = query.deptime === undefined ? '' : query.deptime;
-      const arrivedTime = query.arrivedTime === undefined ? '' : query.arrivedTime;
+      const maxdeptime = query.maxdeptime === undefined ? '' : query.maxdeptime;
+      const mindeptime = query.mindeptime === undefined ? '' : query.mindeptime;
+      const maxarrivedTime = query.maxarrivedTime === undefined ? '' : query.maxarrivedTime;
+      const minarrivedTime = query.minarrivedTime === undefined ? '' : query.minarrivedTime;
       const airlane = query.airlane === undefined ? '' : query.airlane;
       const transit = query.transit === undefined ? '' : query.transit;
       const wifi = query.wifi === undefined ? '' : query.wifi;
@@ -18,7 +20,8 @@ const ticket = {
       const limit = query.limit === undefined ? 50 : query.limit;
       // eslint-disable-next-line eqeqeq
       const offset = query.page === undefined || query.page == 1 ? 0 : (query.page - 1) * limit;
-      ticketModel.getList(search, field, typeSort, limit, offset, deptime, arrivedTime, airlane,
+      ticketModel.getList(search, field, typeSort, limit, offset, maxdeptime,
+        mindeptime, maxarrivedTime, minarrivedTime, airlane,
         transit, wifi, meal, luggage)
         .then(async (result) => {
         // eslint-disable-next-line no-undef
@@ -28,8 +31,10 @@ const ticket = {
             // eslint-disable-next-line no-undef
             totalPage: Math.ceil(allData.length / limit),
             search,
-            deptime,
-            arrivedTime,
+            maxdeptime,
+            mindeptime,
+            maxarrivedTime,
+            minarrivedTime,
             airlane,
             transit,
             wifi,

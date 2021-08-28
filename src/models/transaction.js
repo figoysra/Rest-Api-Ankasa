@@ -14,10 +14,11 @@ const transactionModel = {
   }),
   getList: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
     db.query(
-      `select id_transaction,phone,gender,name,country,insurance,id_ticket,from_id,destination_id,
+      `select id_transaction,phone,gender,name,country,insurance,id_ticket,from_id.country,destination_id,
       class,price,transit,total
       from transaction left join users on transaction.contactPerson=users.id_users  
       left join country on transaction.country_id=country.id_country  
+      left join country on transaction.from_id=country.id_country  
       left join ticket on transaction.ticket_id=ticket.id_ticket
                 WHERE name LIKE "%${search}%"
                 ORDER BY ${field} ${typeSort}

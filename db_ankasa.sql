@@ -27,7 +27,7 @@ CREATE TABLE `country` (
   `town` varchar(100) NOT NULL,
   `country` varchar(100) NOT NULL,
   PRIMARY KEY (`id_country`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `country` (
 
 LOCK TABLES `country` WRITE;
 /*!40000 ALTER TABLE `country` DISABLE KEYS */;
-INSERT INTO `country` VALUES (1,'Surabaya','Indonesia'),(3,'Padang','indonesia');
+INSERT INTO `country` VALUES (1,'Surabaya','Indonesia'),(2,'Medan','indonesia'),(3,'Padang','indonesia'),(4,'Tokyo','jepang'),(5,'Bandung','indonesia'),(6,'Jogja','indonesia'),(7,'amsterdam','belanda');
 /*!40000 ALTER TABLE `country` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,19 +54,19 @@ CREATE TABLE `ticket` (
   `from_id` int(11) NOT NULL,
   `destination_id` int(11) NOT NULL,
   `depTime` datetime NOT NULL,
-  `arrivedTime` varchar(45) NOT NULL,
+  `arrivedTime` datetime NOT NULL,
   `price` int(50) NOT NULL,
   `class` enum('Economy','Business','FistClass') NOT NULL,
   `transit` enum('Direct','Transit','Transit+2') NOT NULL,
   `wifi` tinyint(1) NOT NULL,
   `meal` tinyint(1) NOT NULL,
-  `bagasi` tinyint(1) NOT NULL,
+  `luggage` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_ticket`),
   KEY `from_id` (`from_id`),
   KEY `destination_id` (`destination_id`),
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `country` (`id_country`),
   CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `country` (`id_country`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +75,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'wr','fds',1,3,'2000-09-01 02:12:09','2000-09-01 03:12:10',8000,'Economy','Transit',0,0,0);
+INSERT INTO `ticket` VALUES (1,'wr','fds',1,3,'2000-09-01 02:12:09','2000-09-01 02:12:09',8000,'Economy','Transit',0,1,0),(2,'er','fds',1,2,'2000-09-01 03:12:09','2000-09-01 04:12:09',9000,'Economy','Transit',1,0,0),(3,'et','f',2,4,'2000-09-01 05:12:09','2000-09-01 05:12:09',1000,'Economy','Transit',1,0,1),(4,'rt','g',4,1,'2000-10-01 02:12:09','2000-11-01 02:12:09',10000,'Economy','Transit',0,0,0);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,4 +156,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-27 19:57:07
+-- Dump completed on 2021-08-28 16:27:37

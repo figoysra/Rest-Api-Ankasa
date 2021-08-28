@@ -12,24 +12,10 @@ const countryModel = {
       }
     });
   }),
-  getListByTown: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
+  getList: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
     db.query(
       `select * from country  
-                WHERE town LIKE "%${search}%" 
-                ORDER BY ${field} ${typeSort}
-                LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      },
-    );
-  }),
-  getListByCountry: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
-    db.query(
-      `select * from country  
-                WHERE country LIKE "%${search}%" 
+                WHERE town LIKE "%${search}%" or country LIKE "%${search}%" 
                 ORDER BY ${field} ${typeSort}
                 LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
         if (err) {
@@ -41,7 +27,7 @@ const countryModel = {
     );
   }),
   getDetails: (id) => new Promise((resolve, reject) => {
-    db.query(`select * from country where id='${id}'`, (err, result) => {
+    db.query(`select * from country where id_country='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {
@@ -65,7 +51,7 @@ const countryModel = {
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(
       `update country set town='${body.town}',country='${body.country}'
-        where id='${id}'`, (err, result) => {
+        where id_country='${id}'`, (err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -75,7 +61,7 @@ const countryModel = {
     );
   }),
   delete: (id) => new Promise((resolve, reject) => {
-    db.query(`delete from country where id='${id}'`, (err, result) => {
+    db.query(`delete from country where id_country='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {

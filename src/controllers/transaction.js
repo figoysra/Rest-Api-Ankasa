@@ -1,21 +1,21 @@
-const countryModel = require('../models/country');
+const transactionModel = require('../models/transaction');
 const { success, failed } = require('../helper/respon');
 
-const country = {
+const transaction = {
   getList: (req, res) => {
     try {
       const { query } = req;
       const search = query.search === undefined ? '' : query.search;
-      const field = query.field === undefined ? 'id_country' : query.field;
+      const field = query.field === undefined ? 'id_transaction' : query.field;
       const typeSort = query.sort === undefined ? '' : query.sort;
       const limit = query.limit === undefined ? 50 : query.limit;
       // eslint-disable-next-line eqeqeq
       const offset = query.page === undefined || query.page == 1 ? 0 : (query.page - 1) * limit;
-      countryModel.getList(search, field, typeSort, limit, offset).then(async (result) => {
+      transactionModel.getList(search, field, typeSort, limit, offset).then(async (result) => {
         // eslint-disable-next-line no-undef
-        allData = await countryModel.getAll();
+        allData = await transactionModel.getAll();
         const output = {
-          country: result,
+          transaction: result,
           // eslint-disable-next-line no-undef
           totalPage: Math.ceil(allData.length / limit),
           search,
@@ -33,7 +33,7 @@ const country = {
   getDetails: (req, res) => {
     try {
       const { id } = req.params;
-      countryModel.getDetails(id).then((result) => {
+      transactionModel.getDetails(id).then((result) => {
         success(res, result, 'succes');
       }).catch((err) => {
         failed(res, 500, err);
@@ -45,7 +45,7 @@ const country = {
   insert: (req, res) => {
     try {
       const { body } = req;
-      countryModel.insert(body).then((result) => {
+      transactionModel.insert(body).then((result) => {
         success(res, result, 'succes');
       }).catch((err) => {
         failed(res, 500, err);
@@ -59,7 +59,7 @@ const country = {
     try {
       const { id } = req.params;
       const { body } = req;
-      countryModel.update(body, id).then((result) => {
+      transactionModel.update(body, id).then((result) => {
         success(res, result, 'succes');
       }).catch((err) => {
         failed(res, 500, err);
@@ -71,7 +71,7 @@ const country = {
   delete: (req, res) => {
     try {
       const { id } = req.params;
-      countryModel.delete(id).then((result) => {
+      transactionModel.delete(id).then((result) => {
         success(res, result, 'succes');
       }).catch((err) => {
         failed(res, 500, err);
@@ -82,4 +82,4 @@ const country = {
   },
 };
 
-module.exports = country;
+module.exports = transaction;

@@ -13,7 +13,7 @@ const ticketModel = {
     });
   }),
   getList: (search, field, typeSort, limit, offset, deptime, arrivedTime, airlane, transit,
-    minprice, maxprice, wifi, meal, luggage) => new Promise((resolve, reject) => {
+    wifi, meal, luggage) => new Promise((resolve, reject) => {
     db.query(
       `select id_ticket,logo,airlane,country.town as departure_city, 
       country.country as departure_country, d.town as destination_city, 

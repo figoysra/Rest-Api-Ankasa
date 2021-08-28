@@ -10,8 +10,6 @@ const ticket = {
       const arrivedTime = query.arrivedTime === undefined ? '' : query.arrivedTime;
       const airlane = query.airlane === undefined ? '' : query.airlane;
       const transit = query.transit === undefined ? '' : query.transit;
-      const maxprice = query.maxprice === undefined ? '' : query.maxprice;
-      const minprice = query.minprice === undefined ? '' : query.minprice;
       const wifi = query.wifi === undefined ? '' : query.wifi;
       const meal = query.meal === undefined ? '' : query.meal;
       const luggage = query.luggage === undefined ? '' : query.luggage;
@@ -21,7 +19,7 @@ const ticket = {
       // eslint-disable-next-line eqeqeq
       const offset = query.page === undefined || query.page == 1 ? 0 : (query.page - 1) * limit;
       ticketModel.getList(search, field, typeSort, limit, offset, deptime, arrivedTime, airlane,
-        transit, maxprice, minprice, wifi, meal, luggage)
+        transit, wifi, meal, luggage)
         .then(async (result) => {
         // eslint-disable-next-line no-undef
           allData = await ticketModel.getAll();
@@ -34,8 +32,6 @@ const ticket = {
             arrivedTime,
             airlane,
             transit,
-            maxprice,
-            minprice,
             wifi,
             meal,
             luggage,

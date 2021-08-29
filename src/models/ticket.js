@@ -12,18 +12,31 @@ const ticketModel = {
       }
     });
   }),
-  getList: (search, field, typeSort, limit, offset, mindeptime,
-    maxdeptime, maxarrivedTime, minarrivedTime, airlane, transit,
-    wifi, meal, luggage) => new Promise((resolve, reject) => {
+  getList: (search, field, typeSort, limit, offset, maxdeptime,
+    mindeptime, maxarrivedTime, minarrivedTime, airlane,
+    transit, wifi, meal, luggage, from,
+    to, maxprice, minprice) => new Promise((resolve, reject) => {
     db.query(
       `select id_ticket,logo,airlane,country.town as departure_city, 
       country.country as departure_country, d.town as destination_city, 
       d.country as destination_country, deptime,arrivedTime,price,class,transit,wifi,meal,luggage
       from ticket left join country on ticket.from_id=country.id_country 
       left join country as d on ticket.destination_id=d.id_country
-        WHERE (country.town LIKE "%${search}%" || country.country LIKE "%${search}%")
-            || (wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%" 
-                && transit LIKE "%${transit}%" && airlane LIKE "%${airlane}%")
+        WHERE (d.town LIKE "%${search}%" ||  d.country LIKE "%${search}%")
+        || country.town LIKE "%${from}%"
+        && d.town LIKE "%${to}%"
+        && wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%" 
+        && transit LIKE "%${transit}%" && airlane LIKE "%${airlane}%"
+        && date_format(depTime, '%H:%i:%s') BETWEEN "${mindeptime}" AND "${maxdeptime}"
+        && date_format(arrivedTime, '%H:%i:%s') BETWEEN "${minarrivedTime}" AND "${maxarrivedTime}"
+        && price BETWEEN "${minprice}" AND "${maxprice}"
+        || country.country LIKE "%${from}%"
+        && d.country LIKE "%${to}%"
+        && wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%" 
+        && transit LIKE "%${transit}%" && airlane LIKE "%${airlane}%"
+        && date_format(depTime, '%H:%i:%s') BETWEEN "${mindeptime}" AND "${maxdeptime}"
+        && date_format(arrivedTime, '%H:%i:%s') BETWEEN "${minarrivedTime}" AND "${maxarrivedTime}"
+        && price BETWEEN "${minprice}" AND "${maxprice}"
         ORDER BY ${field} ${typeSort}
         LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
         if (err) {

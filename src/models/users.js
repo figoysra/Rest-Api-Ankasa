@@ -75,13 +75,14 @@ const usersModel = {
     );
   }),
   cekUsername: (body) => new Promise((resolve, reject) => {
-    db.query(`select * from users where username='${body.username}'`, (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    });
+    db.query(`select * from users where username='${body.username}' || email='${body.username}'`,
+      (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
   }),
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(

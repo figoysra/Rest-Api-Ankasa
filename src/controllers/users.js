@@ -35,7 +35,10 @@ const users = {
             if (error) {
               res.json(error);
             } else if (checkpassword === true) {
-              success(res, result, token);
+              const output = {
+                users: result,
+              };
+              success(res, output, token);
             } else {
               failed(res, 401, 'Wrong Password');
             }

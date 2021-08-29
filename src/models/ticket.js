@@ -23,7 +23,7 @@ const ticketModel = {
       left join country as d on ticket.destination_id=d.id_country
         WHERE (country.town LIKE "%${search}%" || country.country LIKE "%${search}%")
             || (wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%" 
-                && (transit LIKE "%${transit}%") && (airlane LIKE "%${airlane}%"))
+                && transit LIKE "%${transit}%" && airlane LIKE "%${airlane}%")
         ORDER BY ${field} ${typeSort}
         LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
         if (err) {

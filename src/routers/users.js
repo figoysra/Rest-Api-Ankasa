@@ -7,7 +7,7 @@ const midauth = require('../midleware/authentication');
 const usersRouter = express.Router();
 usersRouter
   .get('/users', midauth, usersController.getList)
-  .get('/login', usersController.login)
+  .post('/login', usersController.login)
   .get('/users/:id', midauth, usersController.getDetails)
   .post('/users', midauth, usersController.insert)
   .post('/register', usersController.register)

@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `ticket`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ticket` (
   `id_ticket` int(11) NOT NULL AUTO_INCREMENT,
-  `logo` varchar(50) NOT NULL,
+  `logo` varchar(225) NOT NULL,
   `airlane` varchar(50) NOT NULL,
   `from_id` int(11) NOT NULL,
   `destination_id` int(11) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE `ticket` (
   KEY `destination_id` (`destination_id`),
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `country` (`id_country`),
   CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `country` (`id_country`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-log','Garuda Indonesia',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',214,'Economy','Transit',0,0,0,'GIA'),(2,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,2,'2000-09-01 12:33:09','2000-09-01 15:21:09',215,'Economy','Transit',1,0,0,'AXM'),(3,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logoty','LionAir',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',300,'Economy','Transit',1,0,0,'LNI'),(4,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-log','Garuda Indonesia',4,1,'2000-09-01 15:33:09','2000-11-01 17:12:09',314,'Business','Transit',0,0,0,'GIA'),(5,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,7,'2000-09-01 16:33:09','2000-11-01 18:12:09',256,'Business','Direct',0,0,0,'AXM'),(6,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logoty','LionAir',2,4,'2000-09-01 17:33:09','2000-11-01 19:12:09',500,'Business','Direct',0,0,0,'LNI');
+INSERT INTO `ticket` VALUES (1,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-logo-BD82882-F07-seeklogo-1.png','Garuda Indonesia',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',214,'Economy','Transit',0,0,0,'GIA'),(2,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,2,'2000-09-01 12:33:09','2000-09-01 15:21:09',215,'Economy','Transit',1,0,0,'AXM'),(3,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logotype-1.png','LionAir',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',300,'Economy','Transit',1,0,0,'LNI'),(4,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-logo-BD82882-F07-seeklogo-1.png','Garuda Indonesia',4,1,'2000-09-01 15:33:09','2000-11-01 17:12:09',314,'Business','Transit',0,0,0,'GIA'),(5,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,7,'2000-09-01 16:33:09','2000-11-01 18:12:09',256,'Business','Direct',0,0,0,'AXM'),(6,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logotype-1.png','LionAir',2,4,'2000-09-01 17:33:09','2000-11-01 19:12:09',500,'Business','Direct',0,0,0,'LNI');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `transaction` (
   CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id_ticket`),
   CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`country_id`) REFERENCES `country` (`id_country`),
   CONSTRAINT `transaction_ibfk_3` FOREIGN KEY (`contactPerson`) REFERENCES `users` (`id_users`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2000-09-12 05:00:00');
+INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2000-09-12 05:00:00'),(3,1,'Mr','budidoremi1234',2,0,2,2000,'Waiting Payment','0000-00-00 00:00:00'),(4,1,'Mr','lalala',2,0,2,2000,'Waiting Payment','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-30 14:16:14
+-- Dump completed on 2021-08-30 21:09:19

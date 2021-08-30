@@ -51,11 +51,14 @@ const ticketModel = {
     });
   }),
   insert: (body) => new Promise((resolve, reject) => {
-    db.query(`INSERT INTO ticket (logo,airlane,from_id,destination_id,depTime,arrivedTime,
-        price,class,transit,wifi,meal,luggage,codeAirplane ) VALUE (
-        '${body.logo}','${body.from_id}','${body.destination_id}','${body.depTime}',
-        '${body.arrivedTime}','${body.price}','${body.class}','${body.transit}'
-        '${body.wifi}','${body.meal}','${body.luggage}'
+    db.query(`INSERT INTO ticket (
+        logo,airlane,from_id,destination_id,depTime,arrivedTime,
+        price,class,transit,wifi,meal,luggage,codeAirplane
+        ) VALUE (
+        '${body.logo}','${body.airlane}','${body.from_id}','${body.destination_id}',
+        '${body.depTime}','${body.arrivedTime}','${body.price}','${body.class}',
+        '${body.transit}','${body.wifi}','${body.meal}','${body.luggage}',
+        '${body.codeAirplane}'
       )`, (err, result) => {
       if (err) {
         reject(err);
@@ -66,11 +69,11 @@ const ticketModel = {
   }),
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(
-      `update ticket set logo='${body.logo}',from_id='${body.from_id}',
-        destination_id='${body.destination_id}',depTime='${body.depTime}',
-        arrivedTime='${body.arrivedTime}',price='${body.price}',class='${body.price}',
-        transit='${body.transit}',wifi='${body.wifi}',meal='${body.meal}',luggage='${body.luggage}',
-        codeAirline='${body.codeAirplane}'
+      `update ticket set logo='${body.logo}',airlane='${body.airlane}',
+      from_id='${body.from_id}',destination_id=${body.destination_id},
+      depTime='${body.depTime}',arrivedTime='${body.arrivedTime}',price=${body.price},
+      class=${body.price},transit='${body.transit}',wifi=${body.wifi},meal=${body.meal},
+      luggage=${body.luggage},codeAirplane=${body.codeAirplane}
         where id_ticket='${id}'`, (err, result) => {
         if (err) {
           reject(err);

@@ -23,15 +23,8 @@ const ticketModel = {
       from ticket left join country on ticket.from_id=country.id_country 
       left join country as d on ticket.destination_id=d.id_country
         WHERE (d.town LIKE "%${search}%" ||  d.country LIKE "%${search}%")
-        || country.town LIKE "%${from}%"
-        && d.town LIKE "%${to}%"
-        && wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%" 
-        && transit LIKE "%${transit}%" && airlane LIKE "%${airlane}%"
-        && date_format(depTime, '%H:%i:%s') BETWEEN "${mindeptime}" AND "${maxdeptime}"
-        && date_format(arrivedTime, '%H:%i:%s') BETWEEN "${minarrivedTime}" AND "${maxarrivedTime}"
-        && price BETWEEN "${minprice}" AND "${maxprice}"
-        || country.country LIKE "%${from}%"
-        && d.country LIKE "%${to}%"
+        || (country.town LIKE "%${from}%" || country.country LIKE "%${from}%")
+        && ( d.town LIKE "%${to}%" || d.country LIKE "%${to}%" )
         && wifi LIKE "%${wifi}%" && meal LIKE "%${meal}%" && luggage LIKE "%${luggage}%" 
         && transit LIKE "%${transit}%" && airlane LIKE "%${airlane}%"
         && date_format(depTime, '%H:%i:%s') BETWEEN "${mindeptime}" AND "${maxdeptime}"

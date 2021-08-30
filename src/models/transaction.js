@@ -20,7 +20,7 @@ const transactionModel = {
       ticket_id as id_ticket, ticket.logo, ticket.airlane, ticket.class,
       ticket.wifi, ticket.meal, ticket.luggage, country.town as depature, country.country as country,
       des.town as destination, des.country as country, ticket.depTime, ticket.arrivedTime,
-      total, payment 
+      total, payment, orderDate
       from transaction as t left join users as u on t.contactPerson=u.id_users 
       left join country as c on t.country_id = c.id_country 
       left join ticket on t.ticket_id = ticket.id_ticket
@@ -48,12 +48,12 @@ const transactionModel = {
   }),
   insert: (body) => new Promise((resolve, reject) => {
     db.query(`INSERT INTO transaction (
-      contactPerson,gender,name,country_id,insurance,ticket_id,total,payment
+      contactPerson,gender,name,country_id,insurance,ticket_id,total,payment,orderDate
       ) VALUE (
         '${body.contactPerson}','${body.gender}'
         '${body.name}','${body.country_id}'
         '${body.insurance}','${body.ticket_id}'
-        '${body.total}','${body.payment}'
+        '${body.total}','${body.payment}','${body.orderDate}'
       )`, (err, result) => {
       if (err) {
         reject(err);
@@ -67,7 +67,7 @@ const transactionModel = {
       `update transaction set contactPerson='${body.contactPerson}',
          gender='${body.gender}',name='${body.name}',country_id='${body.country_id}',
          insurance='${body.insurance}',ticket_id='${body.ticket_id}',total='${body.total}',
-         payment='${body.payment}'
+         payment='${body.payment}', orderDate='${body.payment}'
         where id_transaction='${id}'`, (err, result) => {
         if (err) {
           reject(err);

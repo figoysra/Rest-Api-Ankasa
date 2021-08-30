@@ -6,10 +6,10 @@ const ticket = {
     try {
       const { query } = req;
       const search = query.search === undefined ? ' ' : query.search;
-      const maxdeptime = query.maxdeptime === undefined ? 'date_format(23:00:00, %H:%i:%s)' : query.maxdeptime;
-      const mindeptime = query.mindeptime === undefined ? '' : query.mindeptime;
-      const maxarrivedTime = query.maxarrivedTime === undefined ? 'date_format(23:00:00, %H:%i:%s)' : query.maxarrivedTime;
-      const minarrivedTime = query.minarrivedTime === undefined ? '' : query.minarrivedTime;
+      const maxdeptime = query.maxdeptime === undefined ? '23:00:00' : query.maxdeptime;
+      const mindeptime = query.mindeptime === undefined ? '00:00:00' : query.mindeptime;
+      const maxarrivedTime = query.maxarrivedTime === undefined ? '23:00:00' : query.maxarrivedTime;
+      const minarrivedTime = query.minarrivedTime === undefined ? '00:00:00' : query.minarrivedTime;
       const airlane = query.airlane === undefined ? '' : query.airlane;
       const transit = query.transit === undefined ? '' : query.transit;
       const wifi = query.wifi === undefined ? '' : query.wifi;

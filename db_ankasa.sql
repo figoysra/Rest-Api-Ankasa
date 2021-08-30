@@ -67,7 +67,7 @@ CREATE TABLE `ticket` (
   KEY `destination_id` (`destination_id`),
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `country` (`id_country`),
   CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `country` (`id_country`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'wr','fds',1,3,'2000-09-01 02:12:09','2000-09-01 03:12:09',8000,'Economy','Transit',0,1,0,'abc'),(2,'er','fds',1,2,'2000-09-01 03:12:09','2000-09-01 04:12:09',9000,'Economy','Transit',1,0,0,'sdf'),(3,'et','f',2,4,'2000-09-01 05:12:09','2000-09-01 05:12:09',1000,'Economy','Transit',1,0,1,'sda'),(4,'rt','g',4,1,'2000-10-01 02:12:09','2000-11-01 02:12:09',10000,'Economy','Transit',0,0,0,'asd');
+INSERT INTO `ticket` VALUES (1,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-log','Garuda Indonesia',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',214,'Economy','Transit',0,0,0,'GIA'),(2,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,2,'2000-09-01 12:33:09','2000-09-01 15:21:09',215,'Economy','Transit',1,0,0,'AXM'),(3,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logoty','LionAir',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',300,'Economy','Transit',1,0,0,'LNI'),(4,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-log','Garuda Indonesia',4,1,'2000-09-01 15:33:09','2000-11-01 17:12:09',314,'Business','Transit',0,0,0,'GIA'),(5,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,7,'2000-09-01 16:33:09','2000-11-01 18:12:09',256,'Business','Direct',0,0,0,'AXM'),(6,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logoty','LionAir',2,4,'2000-09-01 17:33:09','2000-11-01 19:12:09',500,'Business','Direct',0,0,0,'LNI');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2000-09-12 00:00:00');
+INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2000-09-12 05:00:00');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-30 13:25:39
+-- Dump completed on 2021-08-30 14:16:14

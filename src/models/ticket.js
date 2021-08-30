@@ -19,7 +19,8 @@ const ticketModel = {
     db.query(
       `select id_ticket,logo,airlane,country.town as departure_city, 
       country.country as departure_country, d.town as destination_city, 
-      d.country as destination_country, deptime,arrivedTime,price,class,transit,wifi,meal,luggage
+      d.country as destination_country, deptime,arrivedTime,price,class,transit,
+      wifi,meal,luggage,codeAirplane
       from ticket left join country on ticket.from_id=country.id_country 
       left join country as d on ticket.destination_id=d.id_country
         WHERE (d.town LIKE "%${search}%" ||  d.country LIKE "%${search}%")
@@ -51,7 +52,7 @@ const ticketModel = {
   }),
   insert: (body) => new Promise((resolve, reject) => {
     db.query(`INSERT INTO ticket (logo,airlane,from_id,destination_id,depTime,arrivedTime,
-        price,class,transit,wifi,meal,luggage ) VALUE (
+        price,class,transit,wifi,meal,luggage,codeAirplane ) VALUE (
         '${body.logo}','${body.from_id}','${body.destination_id}','${body.depTime}',
         '${body.arrivedTime}','${body.price}','${body.class}','${body.transit}'
         '${body.wifi}','${body.meal}','${body.luggage}'
@@ -68,7 +69,8 @@ const ticketModel = {
       `update ticket set logo='${body.logo}',from_id='${body.from_id}',
         destination_id='${body.destination_id}',depTime='${body.depTime}',
         arrivedTime='${body.arrivedTime}',price='${body.price}',class='${body.price}',
-        transit='${body.transit}',wifi='${body.wifi}',meal='${body.meal}',luggage='${body.luggage}'
+        transit='${body.transit}',wifi='${body.wifi}',meal='${body.meal}',luggage='${body.luggage}',
+        codeAirline='${body.codeAirplane}'
         where id_ticket='${id}'`, (err, result) => {
         if (err) {
           reject(err);

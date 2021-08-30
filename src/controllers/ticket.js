@@ -6,9 +6,9 @@ const ticket = {
     try {
       const { query } = req;
       const search = query.search === undefined ? ' ' : query.search;
-      const maxdeptime = query.maxdeptime === undefined ? '23:00:00' : query.maxdeptime;
+      const maxdeptime = query.maxdeptime === undefined ? '23:59:59' : query.maxdeptime;
       const mindeptime = query.mindeptime === undefined ? '00:00:00' : query.mindeptime;
-      const maxarrivedTime = query.maxarrivedTime === undefined ? '23:00:00' : query.maxarrivedTime;
+      const maxarrivedTime = query.maxarrivedTime === undefined ? '23:59:59' : query.maxarrivedTime;
       const minarrivedTime = query.minarrivedTime === undefined ? '00:00:00' : query.minarrivedTime;
       const airlane = query.airlane === undefined ? '' : query.airlane;
       const transit = query.transit === undefined ? '' : query.transit;
@@ -46,6 +46,8 @@ const ticket = {
             luggage,
             from,
             to,
+            maxprice,
+            minprice,
             limit,
             page: query.page,
           };

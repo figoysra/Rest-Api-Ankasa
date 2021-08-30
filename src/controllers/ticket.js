@@ -6,15 +6,19 @@ const ticket = {
     try {
       const { query } = req;
       const search = query.search === undefined ? ' ' : query.search;
-      const maxdeptime = query.maxdeptime === undefined ? '' : query.maxdeptime;
-      const mindeptime = query.mindeptime === undefined ? '' : query.mindeptime;
-      const maxarrivedTime = query.maxarrivedTime === undefined ? '' : query.maxarrivedTime;
-      const minarrivedTime = query.minarrivedTime === undefined ? '' : query.minarrivedTime;
+      const maxdeptime = query.maxdeptime === undefined ? '23:59:59' : query.maxdeptime;
+      const mindeptime = query.mindeptime === undefined ? '00:00:00' : query.mindeptime;
+      const maxarrivedTime = query.maxarrivedTime === undefined ? '23:59:59' : query.maxarrivedTime;
+      const minarrivedTime = query.minarrivedTime === undefined ? '00:00:00' : query.minarrivedTime;
       const airlane = query.airlane === undefined ? '' : query.airlane;
       const transit = query.transit === undefined ? '' : query.transit;
       const wifi = query.wifi === undefined ? '' : query.wifi;
       const meal = query.meal === undefined ? '' : query.meal;
       const luggage = query.luggage === undefined ? '' : query.luggage;
+      const from = query.from === undefined ? '' : query.from;
+      const to = query.to === undefined ? '' : query.to;
+      const maxprice = query.maxprice === undefined ? '1000000' : query.maxprice;
+      const minprice = query.minprice === undefined ? '0' : query.minprice;
       const field = query.field === undefined ? 'id_ticket' : query.field;
       const typeSort = query.sort === undefined ? '' : query.sort;
       const limit = query.limit === undefined ? 50 : query.limit;
@@ -22,7 +26,7 @@ const ticket = {
       const offset = query.page === undefined || query.page == 1 ? 0 : (query.page - 1) * limit;
       ticketModel.getList(search, field, typeSort, limit, offset, maxdeptime,
         mindeptime, maxarrivedTime, minarrivedTime, airlane,
-        transit, wifi, meal, luggage)
+        transit, wifi, meal, luggage, from, to, maxprice, minprice)
         .then(async (result) => {
         // eslint-disable-next-line no-undef
           allData = await ticketModel.getAll();
@@ -40,6 +44,10 @@ const ticket = {
             wifi,
             meal,
             luggage,
+            from,
+            to,
+            maxprice,
+            minprice,
             limit,
             page: query.page,
           };

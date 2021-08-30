@@ -14,11 +14,18 @@ const transactionModel = {
   }),
   getList: (search, field, typeSort, limit, offset) => new Promise((resolve, reject) => {
     db.query(
-      `select id_transaction,phone,gender,name,country,insurance,id_ticket,from_id,destination_id,
-      class,price,transit,total
-      from transaction left join users on transaction.contactPerson=users.id_users  
-      left join country on transaction.country_id=country.id_country  
-      left join ticket on transaction.ticket_id=ticket.id_ticket
+      `select id_transaction, contactPerson as id_users, 
+      u.username, u.email, u.phone, 
+      gender, name,  c.country, insurance, 
+      ticket_id as id_ticket, ticket.logo, ticket.airlane, ticket.class,
+      ticket.wifi, ticket.meal, ticket.luggage, country.id_country, country.town as depature, country.country as country,
+      des.town as destination, des.country as country, ticket.depTime, ticket.arrivedTime,
+      total, payment, orderDate
+      from transaction as t left join users as u on t.contactPerson=u.id_users 
+      left join country as c on t.country_id = c.id_country 
+      left join ticket on t.ticket_id = ticket.id_ticket
+      left join country on ticket.from_id = country.id_country
+      left join country as des on ticket.destination_id = des.id_country
                 WHERE name LIKE "%${search}%"
                 ORDER BY ${field} ${typeSort}
                 LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
@@ -41,12 +48,12 @@ const transactionModel = {
   }),
   insert: (body) => new Promise((resolve, reject) => {
     db.query(`INSERT INTO transaction (
-      contactPerson,gender,name,country_id,insurance,ticket_id,total,payment
+      contactPerson,gender,name,country_id,insurance,ticket_id,total,payment,orderDate
       ) VALUE (
-        '${body.contactPerson}','${body.gender}'
-        '${body.name}','${body.country_id}'
-        '${body.insurance}','${body.ticket_id}'
-        '${body.total}','${body.payment}'
+        '${body.contactPerson}','${body.gender}',
+        '${body.name}','${body.country_id}',
+        '${body.insurance}','${body.ticket_id}',
+        '${body.total}','${body.payment}','${body.orderDate}'
       )`, (err, result) => {
       if (err) {
         reject(err);
@@ -57,10 +64,10 @@ const transactionModel = {
   }),
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(
-      `update transaction set contactPerson='${body.contactPerson}',
-         gender='${body.gender}',name='${body.name}',country_id='${body.country_id}',
-         insurance='${body.insurance}',ticket_id='${body.ticket_id}',total='${body.total}',
-         payment='${body.payment}'
+      `update transaction set contactPerson=${body.contactPerson},
+         gender='${body.gender}',name='${body.name}',country_id=${body.country_id},
+         insurance=${body.insurance},ticket_id=${body.ticket_id},total=${body.total},
+         payment='${body.payment}', orderDate='${body.payment}'
         where id_transaction='${id}'`, (err, result) => {
         if (err) {
           reject(err);

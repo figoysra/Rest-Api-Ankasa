@@ -61,6 +61,7 @@ CREATE TABLE `ticket` (
   `wifi` tinyint(1) NOT NULL,
   `meal` tinyint(1) NOT NULL,
   `luggage` tinyint(1) NOT NULL,
+  `codeAirplane` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_ticket`),
   KEY `from_id` (`from_id`),
   KEY `destination_id` (`destination_id`),
@@ -75,7 +76,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'wr','fds',1,3,'2000-09-01 02:12:09','2000-09-01 02:12:09',8000,'Economy','Transit',0,1,0),(2,'er','fds',1,2,'2000-09-01 03:12:09','2000-09-01 04:12:09',9000,'Economy','Transit',1,0,0),(3,'et','f',2,4,'2000-09-01 05:12:09','2000-09-01 05:12:09',1000,'Economy','Transit',1,0,1),(4,'rt','g',4,1,'2000-10-01 02:12:09','2000-11-01 02:12:09',10000,'Economy','Transit',0,0,0);
+INSERT INTO `ticket` VALUES (1,'wr','fds',1,3,'2000-09-01 02:12:09','2000-09-01 03:12:09',8000,'Economy','Transit',0,1,0,'abc'),(2,'er','fds',1,2,'2000-09-01 03:12:09','2000-09-01 04:12:09',9000,'Economy','Transit',1,0,0,'sdf'),(3,'et','f',2,4,'2000-09-01 05:12:09','2000-09-01 05:12:09',1000,'Economy','Transit',1,0,1,'sda'),(4,'rt','g',4,1,'2000-10-01 02:12:09','2000-11-01 02:12:09',10000,'Economy','Transit',0,0,0,'asd');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,6 +97,7 @@ CREATE TABLE `transaction` (
   `ticket_id` int(11) NOT NULL,
   `total` int(50) NOT NULL,
   `payment` enum('Eticket Issued','Waiting Payment') NOT NULL,
+  `orderDate` datetime NOT NULL,
   PRIMARY KEY (`id_transaction`),
   KEY `ticket_id` (`ticket_id`),
   KEY `country_id` (`country_id`),
@@ -112,7 +114,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment');
+INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2000-09-12 00:00:00');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-28 16:27:37
+-- Dump completed on 2021-08-30 13:25:39

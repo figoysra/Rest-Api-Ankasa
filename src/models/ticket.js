@@ -15,8 +15,8 @@ const ticketModel = {
   getList: (search, field, typeSort, limit, offset, maxdeptime,
     mindeptime, maxarrivedTime, minarrivedTime, airlane,
     transit, wifi, meal, luggage, from,
-    to, maxprice, minprice) => new Promise((resolve, reject) => {
-    db.query(
+    to, maxprice, minprice,date,cls) => new Promise((resolve, reject) => {
+      db.query(
       `select id_ticket,logo,airlane,country.town as departure_city, 
       country.country as departure_country, d.town as destination_city, 
       d.country as destination_country, deptime,arrivedTime,price,class,transit,
@@ -31,6 +31,8 @@ const ticketModel = {
         && date_format(depTime, '%H:%i:%s') BETWEEN "${mindeptime}" AND "${maxdeptime}"
         && date_format(arrivedTime, '%H:%i:%s') BETWEEN "${minarrivedTime}" AND "${maxarrivedTime}"
         && price BETWEEN "${minprice}" AND "${maxprice}"
+        && date_format(deptime, '%Y-%m-%d') LIKE "${date}"
+        && class LIKE "${cls}"
         ORDER BY ${field} ${typeSort}
         LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
         if (err) {

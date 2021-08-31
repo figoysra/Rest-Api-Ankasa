@@ -17,6 +17,8 @@ const ticket = {
       const luggage = query.luggage === undefined ? '' : query.luggage;
       const from = query.from === undefined ? '' : query.from;
       const to = query.to === undefined ? '' : query.to;
+      const date = query.date === undefined ? '' : query.date;
+      const cls = query.cls === undefined ? '' :query.cls;
       const maxprice = query.maxprice === undefined ? '1000000' : query.maxprice;
       const minprice = query.minprice === undefined ? '0' : query.minprice;
       const field = query.field === undefined ? 'id_ticket' : query.field;
@@ -26,7 +28,7 @@ const ticket = {
       const offset = query.page === undefined || query.page == 1 ? 0 : (query.page - 1) * limit;
       ticketModel.getList(search, field, typeSort, limit, offset, maxdeptime,
         mindeptime, maxarrivedTime, minarrivedTime, airlane,
-        transit, wifi, meal, luggage, from, to, maxprice, minprice)
+        transit, wifi, meal, luggage, from, to, maxprice, minprice, date, cls)
         .then(async (result) => {
         // eslint-disable-next-line no-undef
           allData = await ticketModel.getAll();
@@ -48,6 +50,8 @@ const ticket = {
             to,
             maxprice,
             minprice,
+            date,
+            cls,
             limit,
             page: query.page,
           };

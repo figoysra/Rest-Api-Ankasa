@@ -73,8 +73,8 @@ const ticketModel = {
       `update ticket set logo='${body.logo}',airlane='${body.airlane}',
       from_id='${body.from_id}',destination_id=${body.destination_id},
       depTime='${body.depTime}',arrivedTime='${body.arrivedTime}',price=${body.price},
-      class=${body.price},transit='${body.transit}',wifi=${body.wifi},meal=${body.meal},
-      luggage=${body.luggage},codeAirplane=${body.codeAirplane}
+      class='${body.class}',transit='${body.transit}',wifi=${body.wifi},meal=${body.meal},
+      luggage=${body.luggage},codeAirplane='${body.codeAirplane}'
         where id_ticket='${id}'`, (err, result) => {
         if (err) {
           reject(err);

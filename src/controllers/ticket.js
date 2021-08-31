@@ -18,7 +18,7 @@ const ticket = {
       const from = query.from === undefined ? '' : query.from;
       const to = query.to === undefined ? '' : query.to;
       const date = query.date === undefined ? '' : query.date;
-      const cls = query.cls === undefined ? '' :query.cls;
+      const cls = query.cls === undefined ? '' : query.cls;
       const maxprice = query.maxprice === undefined ? '1000000' : query.maxprice;
       const minprice = query.minprice === undefined ? '0' : query.minprice;
       const field = query.field === undefined ? 'id_ticket' : query.field;

@@ -86,7 +86,7 @@ const usersModel = {
   }),
   update: (body, id) => new Promise((resolve, reject) => {
     db.query(
-      `update USERS set username='${body.username}',email='${body.email}',
+      `update users set username='${body.username}',email='${body.email}',
           password='${body.password}',phone='${body.phone}',address='${body.address}',
           photoProfile='${body.photoProfile}',creditCard='${body.creditCard}',
           admin='${body.admin}' where id_users='${id}'`, (err, result) => {

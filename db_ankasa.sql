@@ -67,7 +67,7 @@ CREATE TABLE `ticket` (
   KEY `destination_id` (`destination_id`),
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`from_id`) REFERENCES `country` (`id_country`),
   CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `country` (`id_country`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-logo-BD82882-F07-seeklogo-1.png','Garuda Indonesia',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',214,'Economy','Transit',0,0,0,'GIA'),(2,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,2,'2000-09-01 12:33:09','2000-09-01 15:21:09',215,'Economy','Transit',1,0,0,'AXM'),(3,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logotype-1.png','LionAir',2,4,'2000-09-01 12:33:09','2000-09-01 15:21:09',300,'Economy','Transit',1,0,0,'LNI'),(4,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-logo-BD82882-F07-seeklogo-1.png','Garuda Indonesia',4,1,'2000-09-01 15:33:09','2000-11-01 17:12:09',314,'Business','Transit',0,0,0,'GIA'),(5,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,7,'2000-09-01 16:33:09','2000-11-01 18:12:09',256,'Business','Direct',0,0,0,'AXM'),(6,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logotype-1.png','LionAir',2,4,'2000-09-01 17:33:09','2000-11-01 19:12:09',500,'Business','Direct',0,0,0,'LNI');
+INSERT INTO `ticket` VALUES (1,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-logo-BD82882-F07-seeklogo-1.png','Garuda Indonesia',2,4,'2021-09-05 07:33:09','2021-09-05 08:21:09',214,'Economy','Transit',0,0,0,'GIA'),(2,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,2,'2021-09-05 08:33:09','2021-09-05 09:21:09',215,'Economy','Transit',1,0,0,'AXM'),(3,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logotype-1.png','LionAir',2,4,'2021-09-05 09:33:09','2021-09-05 10:21:09',300,'Economy','Transit',1,0,0,'LNI'),(4,'https://i.postimg.cc/L5BK1D3v/garuda-indonesia-logo-BD82882-F07-seeklogo-1.png','Garuda Indonesia',4,1,'2021-09-05 12:33:09','2021-09-05 13:21:09',314,'Business','Transit',0,0,0,'GIA'),(5,'https://i.postimg.cc/Fs3g0qch/AIR-ASIA-1-1.png','Airasia',1,7,'2021-09-05 15:33:09','2021-09-05 16:21:09',256,'Business','Direct',0,0,0,'AXM'),(6,'https://i.postimg.cc/FRw3LgHf/Lion-Air-logo-logotype-1.png','LionAir',2,4,'2021-10-05 11:33:09','2021-09-05 19:21:09',500,'Business','Direct',0,0,0,'LNI');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `transaction` (
 
 LOCK TABLES `transaction` WRITE;
 /*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2000-09-12 05:00:00'),(3,1,'Mr','budidoremi1234',2,0,2,2000,'Waiting Payment','0000-00-00 00:00:00'),(4,1,'Mr','lalala',2,0,2,2000,'Waiting Payment','0000-00-00 00:00:00');
+INSERT INTO `transaction` VALUES (1,6,'Mr','Mike Kowalski',1,0,1,30000,'Waiting Payment','2021-09-12 05:00:00'),(3,1,'Mr','budidoremi1234',2,0,2,2000,'Waiting Payment','2021-09-12 06:00:00'),(4,1,'Mr','lalala',2,0,2,2000,'Waiting Payment','2021-09-12 07:00:00');
 /*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +136,7 @@ CREATE TABLE `users` (
   `creditCard` varchar(45) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_users`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin','$2b$10$hAUwm4n68t9Q3zP112jKcuRl6VVMLouendAgzKjzV4v/vXlSMpB2.',NULL,NULL,NULL,NULL,0),(6,'Make Kowalski','flightbooking@ankasa.com','$2b$10$F8pzS69MUNurAofdsuP4Ke3nGwAF67zThgo31qyxkoQu23B.BJHLO',2147483647,'medan,indonesia','https://i.postimg.cc/CMGc3Fdz/nnzk-ZNYWHa-U.png','4441 1235 5512 5551',1);
+INSERT INTO `users` VALUES (1,'admin','admin','$2b$10$hAUwm4n68t9Q3zP112jKcuRl6VVMLouendAgzKjzV4v/vXlSMpB2.',123,'jakarta','','admin',0),(6,'Make Kowalski','flightbooking@ankasa.com','$2b$10$F8pzS69MUNurAofdsuP4Ke3nGwAF67zThgo31qyxkoQu23B.BJHLO',2147483647,'medan,indonesia','https://i.postimg.cc/CMGc3Fdz/nnzk-ZNYWHa-U.png','4441 1235 5512 5551',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-30 21:09:19
+-- Dump completed on 2021-08-31 16:55:40

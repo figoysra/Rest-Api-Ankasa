@@ -67,7 +67,7 @@ const transactionModel = {
       `update transaction set contactPerson=${body.contactPerson},
          gender='${body.gender}',name='${body.name}',country_id=${body.country_id},
          insurance=${body.insurance},ticket_id=${body.ticket_id},total=${body.total},
-         payment='${body.payment}', orderDate='${body.payment}'
+         payment='${body.payment}', orderDate='${body.orderDate}'
         where id_transaction='${id}'`, (err, result) => {
         if (err) {
           reject(err);

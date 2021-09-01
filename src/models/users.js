@@ -84,10 +84,10 @@ const usersModel = {
         }
       });
   }),
-  update: (body, id) => new Promise((resolve, reject) => {
+  update: (body, id, hashpassword) => new Promise((resolve, reject) => {
     db.query(
       `update users set username='${body.username}',email='${body.email}',
-          password='${body.password}',phone='${body.phone}',address='${body.address}',
+          password='${hashpassword}',phone='${body.phone}',address='${body.address}',
           photoProfile='${body.photoProfile}',creditCard='${body.creditCard}',
           admin='${body.admin}' where id_users='${id}'`, (err, result) => {
         if (err) {

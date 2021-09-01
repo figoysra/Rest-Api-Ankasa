@@ -1,7 +1,7 @@
 const { token } = require('../helper/env');
 
 const data = {
-  message: 'login succes',
+  message: 'succes',
   tokenAcces: token,
 };
 

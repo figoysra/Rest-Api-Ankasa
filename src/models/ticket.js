@@ -43,7 +43,13 @@ const ticketModel = {
     );
   }),
   getDetails: (id) => new Promise((resolve, reject) => {
-    db.query(`select * from ticket where id_ticket='${id}'`, (err, result) => {
+    db.query(`select id_ticket,logo,airlane,country.town as departure_city, 
+    country.country as departure_country, d.town as destination_city, 
+    d.country as destination_country, deptime,arrivedTime,price,class,transit,
+    wifi,meal,luggage,codeAirplane
+    from ticket left join country on ticket.from_id=country.id_country 
+    left join country as d on ticket.destination_id=d.id_country
+      WHERE id_ticket='${id}'`, (err, result) => {
       if (err) {
         reject(err);
       } else {

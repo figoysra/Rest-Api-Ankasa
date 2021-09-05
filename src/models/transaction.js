@@ -18,7 +18,7 @@ const transactionModel = {
       u.username, u.email, u.phone, 
       gender, name,  c.country, insurance, 
       ticket_id as id_ticket, ticket.logo, ticket.airlane, ticket.class,
-      ticket.wifi, ticket.meal, ticket.luggage, country.id_country, country.town as depature, country.country as country,
+      ticket.wifi, ticket.meal, ticket.luggage, ticket.codeAirplane ,country.id_country, country.town as depature, country.country as country,
       des.town as destination, des.country as country, ticket.depTime, ticket.arrivedTime,
       total, payment, orderDate
       from transaction as t left join users as u on t.contactPerson=u.id_users 

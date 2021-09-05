@@ -13,7 +13,7 @@ const users = {
           failed(res, 401, err);
         } else {
           usersModel.register(body, hash).then((result) => {
-            success(res, result, 'succes');
+            success(res, result, token);
           }).catch((err1) => {
             failed(res, 401, err1);
           });
@@ -109,10 +109,17 @@ const users = {
     try {
       const { id } = req.params;
       const { body } = req;
-      usersModel.update(body, id).then((result) => {
-        success(res, result, 'succes');
-      }).catch((err) => {
-        failed(res, 500, err);
+      bcrypt.hash(body.password, 10, (errb, hash) => {
+        // Store hash in your password DB.
+        if (errb) {
+          failed(res, 401, errb);
+        } else {
+          usersModel.update(body, id, hash).then((result) => {
+            success(res, result, 'succes');
+          }).catch((err) => {
+            failed(res, 500, err);
+          });
+        }
       });
     } catch (error) {
       failed(res, 401, error);

@@ -62,9 +62,9 @@ const usersModel = {
   }),
   register: (body, pass) => new Promise((resolve, reject) => {
     db.query(
-      `INSERT INTO users (username,email,password,admin) 
+      `INSERT INTO users (username,email,password, photoProfile, admin) 
         VALUE (
-          '${body.username}','${body.email}','${pass}','${body.admin}'
+          '${body.username}','${body.email}','${pass}','${body.photoProfile}','${body.admin}'
         )`, (err, result) => {
         if (err) {
           reject(err);
@@ -84,10 +84,10 @@ const usersModel = {
         }
       });
   }),
-  update: (body, id) => new Promise((resolve, reject) => {
+  update: (body, id, hashpassword) => new Promise((resolve, reject) => {
     db.query(
       `update users set username='${body.username}',email='${body.email}',
-          password='${body.password}',phone='${body.phone}',address='${body.address}',
+          password='${hashpassword}',phone='${body.phone}',address='${body.address}',
           photoProfile='${body.photoProfile}',creditCard='${body.creditCard}',
           admin='${body.admin}' where id_users='${id}'`, (err, result) => {
         if (err) {

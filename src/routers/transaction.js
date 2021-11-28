@@ -1,13 +1,13 @@
 const express = require('express');
 const transactionController = require('../controllers/transaction');
-const midauth = require('../midleware/authentication');
+const authentication = require('../midleware/authentication');
 
 const transactionRouter = express.Router();
 transactionRouter
-  .get('/transaction', midauth, transactionController.getList)
-  .get('/transaction/:id', midauth, transactionController.getDetails)
-  .post('/transaction', midauth, transactionController.insert)
-  .put('/transaction/:id', midauth, transactionController.update)
-  .delete('/transaction/:id', midauth, transactionController.delete);
+  .get('/transaction', authentication, transactionController.getList)
+  .get('/transaction/:id', authentication, transactionController.getDetails)
+  .post('/transaction', authentication, transactionController.insert)
+  .put('/transaction/:id', authentication, transactionController.update)
+  .delete('/transaction/:id', authentication, transactionController.delete);
 
 module.exports = transactionRouter;

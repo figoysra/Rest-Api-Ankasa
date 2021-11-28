@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const ticketModel = require('../models/ticket');
 const { success, failed } = require('../helper/respon');
 

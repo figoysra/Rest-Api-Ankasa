@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
+const {PORT} = require('./src/helper/env')
 
 const usersRouter = require('./src/routers/users');
 const countryRouter = require('./src/routers/country');
@@ -15,6 +16,6 @@ app.use(countryRouter);
 app.use(ticketRouter);
 app.use(transactionRouter);
 
-app.listen(8000, () => {
-  console.log('service running on port 8000');
+app.listen(PORT, () => {
+  console.log(`service running on port ${PORT}`);
 });

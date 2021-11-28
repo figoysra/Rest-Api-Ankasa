@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const response = {
   success: (res, data, message) => {
     const response1 = {

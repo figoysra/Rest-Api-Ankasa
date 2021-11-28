@@ -2,16 +2,17 @@
 
 const express = require('express');
 const usersController = require('../controllers/users');
-const midauth = require('../midleware/authentication');
+const authentication = require('../midleware/authentication');
+const authorization = require('../midleware/authorization')
 
 const usersRouter = express.Router();
 usersRouter
-  .get('/users', midauth, usersController.getList)
+  .get('/users', authentication,authorization, usersController.getList)
   .post('/login', usersController.login)
-  .get('/users/:id', midauth, usersController.getDetails)
-  .post('/users', midauth, usersController.insert)
+  .get('/users/:id', authentication, usersController.getDetails)
+  .post('/users', authentication,authorization, usersController.insert)
   .post('/register', usersController.register)
-  .put('/users/:id', midauth, usersController.update)
-  .delete('/users/:id', midauth, usersController.delete);
+  .put('/users/:id', authentication, usersController.update)
+  .delete('/users/:id', authentication,authorization, usersController.delete);
 
 module.exports = usersRouter;

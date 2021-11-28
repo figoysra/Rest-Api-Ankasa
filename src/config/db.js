@@ -1,13 +1,13 @@
 // bisa tergubung ke mysql2
 const mysql = require('mysql2');
-const { dbUsername, dbPassword } = require('../helper/env');
+const { dbUsername, dbPassword, DB_HOST, DB_NAME } = require('../helper/env');
 
 // untuk mengkoneksikan backend dengan mysql
 const db = mysql.createConnection({
-  host: 'localhost',
+  host: DB_HOST,
   user: dbUsername,
   password: dbPassword,
-  database: 'db_ankasa',
+  database: DB_NAME,
 });
 
 // unutk mengecek koneksi

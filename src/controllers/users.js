@@ -1,24 +1,39 @@
 const bcrypt = require('bcrypt');
 const usersModel = require('../models/users');
+const jwt = require("jsonwebtoken");
 const { success, failed } = require('../helper/respon');
-const token = require('../config/token');
+// const token = require('../config/token');
+const {JWT_SECRET} = require('../helper/env')
+
 
 const users = {
   register: (req, res) => {
     try {
       const { body } = req;
-      bcrypt.hash(body.password, 10, (err, hash) => {
-        // Store hash in your password DB.
-        if (err) {
+      usersModel
+        .cekUsername(body)
+        .then((result) => {
+          console.log(result)
+          if (result.length <= 0) {
+            bcrypt.hash(body.password, 10, (err, hash) => {
+              // Store hash in your password DB.
+              if (err) {
+                failed(res, 401, err);
+              } else {
+                usersModel.register(body, hash).then((result) => {
+                  success(res, result);
+                }).catch((err1) => {
+                  failed(res, 401, err1);
+                });
+              }
+            });
+          } else {
+            failed(res.status(401), 401, "username telah terdaftar");
+          }
+        })
+        .catch((err) => {
           failed(res, 401, err);
-        } else {
-          usersModel.register(body, hash).then((result) => {
-            success(res, result, token);
-          }).catch((err1) => {
-            failed(res, 401, err1);
-          });
-        }
-      });
+        });
     } catch (error) {
       failed(res, 401, error);
     }
@@ -28,17 +43,21 @@ const users = {
       const { body } = req;
       usersModel.cekUsername(body).then((result) => {
         if (result.length <= 0) {
-          failed(res, 100, 'username salah');
+          failed(res.status(401), 401, 'username / email salah');
         } else {
           const passwordHash = result[0].password;
           bcrypt.compare(body.password, passwordHash, (error, checkpassword) => {
             if (error) {
               res.json(error);
             } else if (checkpassword === true) {
-              const output = {
-                users: result,
-              };
-              success(res, output, token);
+              
+              const user = result[0]
+              const payload = {
+                id: user.id_users,
+                username: user.username
+              }
+              const token = jwt.sign(payload, JWT_SECRET);
+              success(res, user, token);
             } else {
               failed(res, 401, 'Wrong Password');
             }
@@ -84,7 +103,12 @@ const users = {
     try {
       const { id } = req.params;
       usersModel.getDetails(id).then((result) => {
-        success(res, result, 'succes');
+        if(result.length <= 0 ){
+          failed(res.status(401), 401, "user not found")
+        }else{
+          success(res, result[0], 'succes');
+        }
+        
       }).catch((err) => {
         failed(res, 500, err);
       });

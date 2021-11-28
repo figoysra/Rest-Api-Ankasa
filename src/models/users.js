@@ -75,7 +75,7 @@ const usersModel = {
     );
   }),
   cekUsername: (body) => new Promise((resolve, reject) => {
-    db.query(`select * from users where username='${body.username}' || email='${body.username}'`,
+    db.query(`select * from users where username='${body.username}' || email='${body.email}'`,
       (err, result) => {
         if (err) {
           reject(err);
@@ -110,3 +110,5 @@ const usersModel = {
 };
 
 module.exports = usersModel;
+
+
